@@ -22,11 +22,29 @@ export default function RequestForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async(e: FormEvent) => {
-    e.preventDefault();
-    console.log(formData);
+  const [error, setError] = useState<string | null>(null);
+
+const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+  setError(null);
+
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/Requests`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (!res.ok) {
+      throw new Error(`Server responded with ${res.status}`);
+    }
+
     setSubmitted(true);
-  };
+  } catch (err) {
+    console.error(err);
+    setError('Something went wrong submitting your request. Please try again.');
+  }
+};
 
   if (submitted) {
     return <div className="alert alert-success mt-4"> Thank you for your submission! </div>;
