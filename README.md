@@ -31,5 +31,8 @@ Requests are sent between the frontend and backend through REST API endpoints. E
 
 I kept the frontend and backend separate so each part of the application can be developed, tested, and deployed independently. This also makes it easier to replace or scale individual parts of the system later.
 
+**Live demo:** https://citizen-service-portal.netlify.app
+**API:** https://citizen-service-api-vnrm.onrender.com/api/Requests
 
+Note!: the free-tier API may take 30–60 seconds to respond on first load after inactivity (cold start).
 
